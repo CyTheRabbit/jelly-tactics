@@ -9,8 +9,7 @@ namespace Player
         public event Action<Vector2> Flicked = null;
 
 
-        [SerializeField] private float m_minDistance = 0;
-        [SerializeField] private float m_maxDuration = float.PositiveInfinity;
+        [SerializeField] private InputConfig m_config = null;
         [SerializeField] private bool m_normalize = true;
         [SerializeField] private InputAction m_moveAction = null;
         [SerializeField] private InputAction m_flickAction = null;
@@ -62,9 +61,8 @@ namespace Player
         private void Flick()
         {
             Vector2 delta = endPosition - startPosition;
-            if (flickDuration > m_maxDuration) return;
-            if (delta.magnitude < m_minDistance) return;
-            if (m_normalize) delta = delta.normalized;
+            if (!m_config.IsFlick(delta, flickDuration)) return;
+            if (m_normalize) delta.Normalize();
             Flicked?.Invoke(delta);
         }
     }

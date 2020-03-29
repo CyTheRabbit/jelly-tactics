@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9a2f0a3bd34d6f94734390be1a7479, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_minDistance: 0
-  m_maxDuration: Infinity
+  m_config: {fileID: 11400000, guid: 33f650d229bec46f0a4a4ce80446b430, type: 2}
   m_normalize: 1
   m_moveAction:
     m_Name: Move
