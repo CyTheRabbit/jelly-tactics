@@ -28,14 +28,12 @@ namespace Enemies.AI
                 rays.Clear();
                 if (!IsSafe())
                 {
-                    Debug.Log("unsafe");
                     // Play panic
                     ChangeLocation();
                     yield return new WaitUntil(() => m_mover.Halt);
                 }
                 else
                 {
-                    Debug.Log("safe");
                     yield return new WaitForSeconds(0.2f);
                 }
             }
@@ -59,7 +57,6 @@ namespace Enemies.AI
             int mask = 1 << LayerMask.NameToLayer("Default");
             if (Physics.Raycast(pos, dir, out RaycastHit hit, m_safeDistance, mask))
             {
-                Debug.Log(hit.collider.name);
                 return new Location {Position = t, SpaceBefore = hit.distance};
             }
             return null;
@@ -77,7 +74,6 @@ namespace Enemies.AI
                 Location? loc = CalcLocation(progress);
                 if (loc.HasValue)
                 {
-                    Debug.Log(loc.Value);
                     result.Add(loc.Value);
                 }
                 progress += step;
