@@ -5,13 +5,13 @@ namespace Enemies.AI
     public class HunterAI : MonoBehaviour
     {
         [SerializeField] private Route m_route = null;
-        [SerializeField] private RouteMover m_mover = null;
+        [SerializeField] private RouteFollower m_follower = null;
 
         private void OnIntersected(Rigidbody other, float position)
         {
             if (other.CompareTag("Player"))
             {
-                m_mover.Target = position;
+                m_follower.Target = position;
             }
         }
 

@@ -9,7 +9,6 @@ namespace Enemies.AI
     {
         [SerializeField] private Route m_route = null;
         [SerializeField] private RouteFollower m_follower = null;
-        [SerializeField] private RouteMover m_mover = null;
         [SerializeField] private float m_safeDistance = 2;
 
         private readonly List<Ray> rays = new List<Ray>();
@@ -30,7 +29,7 @@ namespace Enemies.AI
                 {
                     // Play panic
                     ChangeLocation();
-                    yield return new WaitUntil(() => m_mover.Halt);
+                    yield return new WaitUntil(() => m_follower.Halt);
                 }
                 else
                 {
@@ -107,8 +106,7 @@ namespace Enemies.AI
                 // Play panic
                 return;
             }
-            Debug.Log(locations.Count);
-            m_mover.Target = locations.Where(IsSafe).First().Position;
+            m_follower.Target = locations.Where(IsSafe).First().Position;
         }
     }
 }
