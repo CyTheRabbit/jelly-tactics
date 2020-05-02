@@ -54,7 +54,6 @@ namespace Enemies
                 Rigidbody body = hit.rigidbody;
                 if (!lastingIntersections.Contains(body))
                 {
-                    Debug.Log(body.name);
                     float position = hit.distance / Length;
                     ActorIntersected?.Invoke(body, position);
                 }
