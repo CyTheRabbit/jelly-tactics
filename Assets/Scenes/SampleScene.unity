@@ -1131,6 +1131,7 @@ GameObject:
   - component: {fileID: 1492495102}
   - component: {fileID: 1492495095}
   - component: {fileID: 1492495103}
+  - component: {fileID: 1492495096}
   m_Layer: 9
   m_Name: Crab
   m_TagString: Untagged
@@ -1147,7 +1148,7 @@ Transform:
   m_GameObject: {fileID: 1492495093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.3, y: 0, z: 0.15999997}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1043915641}
   m_Father: {fileID: 1135832607}
@@ -1171,6 +1172,18 @@ MonoBehaviour:
     m_wait: 2
   - m_position: 1
     m_wait: 2
+--- !u!114 &1492495096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492495093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e75eb074874c8abe323117c20de639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1492495098
 MonoBehaviour:
   m_ObjectHideFlags: 0
