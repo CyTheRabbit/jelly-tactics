@@ -2,8 +2,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    [RequireComponent(typeof(RouteFollower))]
-    public class Crab : MonoBehaviour, WeakSpot.IListener
+    public class Crab : RouteFollower, WeakSpot.IListener
     {
         private void Perish()
         {
