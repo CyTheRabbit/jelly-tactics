@@ -1,4 +1,5 @@
 using System;
+using Jellyfish;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ namespace Player
     public class FlickController : MonoBehaviour
     {
         public event Action<Vector2> Flicked = null;
+        public event Action<Vector2, Pawn> FlickedManual = null;
 
 
         [SerializeField] private InputConfig m_config = null;
@@ -19,6 +21,7 @@ namespace Player
         private Vector2 endPosition = Vector2.zero;
         private Vector2 currentPosition = Vector2.zero;
         private float flickDuration = 0;
+        private Pawn flickedPawn = null;
 
 
         private void Awake()
@@ -26,6 +29,10 @@ namespace Player
             m_moveAction.performed += OnMove;
             m_flickAction.started += OnFlickStart;
             m_flickAction.performed += OnFlickEnd;
+            if (m_config.IsManualFlick)
+            {
+                m_flickAction.started += SelectPawn;
+            }
         }
 
         private void OnEnable()
@@ -51,19 +58,34 @@ namespace Player
             startPosition = currentPosition;
         }
 
+        private void SelectPawn(InputAction.CallbackContext ctx)
+        {
+            Vector2 screenPoint = currentPosition;
+            Ray ray = Camera.main.ScreenPointToRay(screenPoint);
+            int mask = LayerMask.NameToLayer("Jellyfish");
+            flickedPawn = Physics.Raycast(ray, out RaycastHit hit, mask) ? hit.collider.GetComponent<Pawn>() : null;
+        }
+
         private void OnFlickEnd(InputAction.CallbackContext ctx)
         {
             endPosition = currentPosition;
             flickDuration = (float)(ctx.time - ctx.startTime);
-            Flick();
+            Flick(flickedPawn);
         }
 
-        private void Flick()
+        private void Flick(Pawn pawn = null)
         {
             Vector2 delta = endPosition - startPosition;
             if (!m_config.IsFlick(delta, flickDuration)) return;
             if (m_normalize) delta.Normalize();
-            Flicked?.Invoke(delta);
+            if (pawn != null)
+            {
+                FlickedManual?.Invoke(delta, pawn);
+            }
+            else
+            {
+                Flicked?.Invoke(delta);
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Player
         private void Start()
         {
             m_flicker.Flicked += Dispatch;
+            m_flicker.FlickedManual += ManualDispatch;
         }
 
         private void Dispatch(Vector2 direction2d)
@@ -21,6 +22,15 @@ namespace Player
             furthest.Freeze = false;
             furthest.transform.SetParent(null, true);
             furthest.Flick(direction);
+        }
+
+        private void ManualDispatch(Vector2 direction2d, Pawn pawn)
+        {
+            if (pawn.transform.parent != transform) return;
+            Vector3 direction = ProjectDirection(direction2d);
+            pawn.Freeze = false;
+            pawn.transform.SetParent(null, true);
+            pawn.Flick(direction);
         }
         
         [CanBeNull]

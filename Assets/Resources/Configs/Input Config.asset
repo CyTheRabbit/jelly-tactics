@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minDistance: 10
   m_maxDuration: 60
+  m_manualFlick: 1
