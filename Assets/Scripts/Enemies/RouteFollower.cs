@@ -23,7 +23,7 @@ namespace Enemies
             set
             {
                 position = value;
-                GetComponentInParent<Route>().Refresh();
+                GetComponentInParent<BaseRoute>().Refresh();
             }
         }
 

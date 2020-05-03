@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -6,10 +5,8 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class Route : MonoBehaviour
+    public class Route : BaseRoute
     {
-        public event Action<Rigidbody, float> ActorIntersected = null;
-
         [SerializeField] private Vector3 m_leftHand = Vector3.right;
         [SerializeField] private Vector3 m_rightHand = Vector3.right;
 
@@ -40,9 +37,9 @@ namespace Enemies
 #endif
         }
 
-        public float Length => (RightHand - LeftHand).magnitude;
+        public override float Length => (RightHand - LeftHand).magnitude;
 
-        public Vector3 Rotation(float _) => Vector3.Cross(RightHand - LeftHand, Vector3.up);
+        public override Vector3 Rotation(float _) => Vector3.Cross(RightHand - LeftHand, Vector3.up);
 
         private void CheckIntersection()
         {
@@ -55,7 +52,7 @@ namespace Enemies
                 if (!lastingIntersections.Contains(body))
                 {
                     float position = hit.distance / Length;
-                    ActorIntersected?.Invoke(body, position);
+                    OnActorIntersected(body, position);
                 }
             }
             lastingIntersections.Clear();
@@ -67,27 +64,11 @@ namespace Enemies
             }
         }
 
-        public Vector3 Lerp(float position) => Vector3.Lerp(LeftHand, RightHand, position);
+        public override Vector3 Lerp(float position) => Vector3.Lerp(LeftHand, RightHand, position);
 
         private void FixedUpdate()
         {
             CheckIntersection();
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawIcon(LeftHand, "arrowLeft.png", false, Color.white);
-            Gizmos.DrawIcon(RightHand, "arrowRight.png", false, Color.white);
-            Gizmos.DrawLine(LeftHand, RightHand);
-        }
-
-        public void Refresh()
-        {
-                foreach (RouteFollower follower in GetComponentsInChildren<RouteFollower>())
-                {
-                    follower.transform.position = Lerp(follower.Position);
-                    follower.transform.rotation = Quaternion.LookRotation(Rotation(follower.Position));
-                }
         }
     }
 
@@ -99,6 +80,12 @@ namespace Enemies
             Route route = (Route) target;
 
             EditorGUI.BeginChangeCheck();
+            const float steps = 32;
+            for (int i = 0; i < steps; i++)
+            {
+                Handles.color = Color.Lerp(Color.white, Color.red, i / steps);
+                Handles.DrawLine(route.Lerp(i / steps), route.Lerp((i + 1) / steps));
+            }
             Vector3 left = Handles.PositionHandle(route.LeftHand, Quaternion.identity);
             Vector3 right = Handles.PositionHandle(route.RightHand, Quaternion.identity);
             if (EditorGUI.EndChangeCheck())

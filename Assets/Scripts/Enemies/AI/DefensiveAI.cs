@@ -7,7 +7,7 @@ namespace Enemies.AI
 {
     public class DefensiveAI : MonoBehaviour
     {
-        [SerializeField] private Route m_route = null;
+        [SerializeField] private BaseRoute m_route = null;
         [SerializeField] private RouteFollower m_follower = null;
         [SerializeField] private float m_safeDistance = 2;
 

@@ -4,14 +4,14 @@ namespace Enemies.AI
 {
     public class HunterAI : MonoBehaviour
     {
-        [SerializeField] private Route m_route = null;
+        [SerializeField] private BaseRoute m_route = null;
         [SerializeField] private RouteFollower m_follower = null;
 
         private void OnIntersected(Rigidbody other, float position)
         {
             if (other.CompareTag("Player"))
             {
-                m_follower.Target = position;
+                m_follower.SetTarget(position);
             }
         }
 
