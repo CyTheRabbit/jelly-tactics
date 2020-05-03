@@ -61,6 +61,7 @@ namespace Player
         private void SelectPawn(InputAction.CallbackContext ctx)
         {
             Vector2 screenPoint = currentPosition;
+            if (Camera.main == null) return;
             Ray ray = Camera.main.ScreenPointToRay(screenPoint);
             int mask = LayerMask.NameToLayer("Jellyfish");
             flickedPawn = Physics.Raycast(ray, out RaycastHit hit, mask) ? hit.collider.GetComponent<Pawn>() : null;

@@ -22,9 +22,15 @@ namespace Jellyfish
         
         [SerializeField] private string m_typeName = null;
         [SerializeField, ReorderableList] private ImpulseDescription[] m_impulses = null;
+        [SerializeField] private AnimationCurve m_jumpCurve = null;
+        [SerializeField] private float m_jumpTime = 0;
 
         public string Name => m_typeName;
 
         public IEnumerable<ImpulseDescription> Impulses => m_impulses;
+
+        public float JumpAt(float t) => m_jumpCurve.Evaluate(t);
+
+        public float JumpTime => m_jumpTime;
     }
 }

@@ -13,8 +13,10 @@ namespace Jellyfish
 
         [SerializeField] private JellyfishConfig m_config = null;
 
+        private Vector3 startPosition = Vector3.zero;
+        private Transform startParent = null;
         private new Rigidbody rigidbody = null;
-        private Routine flickRoutine = null;
+        private Routine moveRoutine = null;
 
         public bool Freeze
         {
@@ -26,14 +28,20 @@ namespace Jellyfish
         private void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
-            flickRoutine = new Routine(this);
+            moveRoutine = new Routine(this);
             Freeze = true;
+        }
+
+        private void Start()
+        {
+            startPosition = rigidbody.position;
+            startParent = transform.parent;
         }
 
         public void Flick(Vector3 direction)
         {
             // rigidbody.AddForce(direction * m_config.Impulse, ForceMode.VelocityChange);
-            flickRoutine.Start(ImpulsesCoroutine(direction));
+            moveRoutine.Start(ImpulsesCoroutine(direction));
         }
 
         public void Boost()
@@ -43,7 +51,12 @@ namespace Jellyfish
 
         public void Stop()
         {
-            throw new NotImplementedException();
+            moveRoutine.Stop();
+        }
+
+        public void JumpReset()
+        {
+            moveRoutine.Start(JumpCoroutine(startPosition, m_config.JumpTime));
         }
 
         private IEnumerator ImpulsesCoroutine(Vector3 direction)
@@ -59,6 +72,31 @@ namespace Jellyfish
                 rigidbody.drag = impulse.Draw;
             }
             Stopped?.Invoke();
+        }
+
+        private IEnumerator JumpCoroutine(Vector3 to, float duration)
+        {
+            RigidbodyConstraints prevConstraints = rigidbody.constraints;
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            rigidbody.velocity = Vector3.zero;
+
+            Vector3 from = rigidbody.position;
+            float beginTime = Time.time;
+            float endTime = beginTime + duration;
+
+            while (Time.time < endTime)
+            {
+                float progress = (Time.time - beginTime) / duration;
+                Vector3 pos = Vector3.Lerp(from, to, progress);
+                pos.y += m_config.JumpAt(progress);
+                
+                rigidbody.MovePosition(pos);
+                yield return null;
+            }
+            rigidbody.MovePosition(to);
+            yield return null;
+            Freeze = true;
+            transform.SetParent(startParent);
         }
     }
 }
