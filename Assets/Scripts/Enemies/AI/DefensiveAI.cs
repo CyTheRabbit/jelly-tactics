@@ -106,7 +106,7 @@ namespace Enemies.AI
                 // Play panic
                 return;
             }
-            m_follower.Target = locations.Where(IsSafe).First().Position;
+            m_follower.SetTarget(locations.Where(IsSafe).First().Position);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Enemies.AI
             {
                 foreach (Place place in m_places)
                 {
-                    m_follower.Target = place.Position;
+                    m_follower.SetTarget(place.Position);
                     yield return new WaitUntil(() => m_follower.Halt);
                     yield return new WaitForSeconds(place.Wait);
                 }

@@ -11,15 +11,17 @@ namespace Enemies
 
         [Range(0, 1)] [SerializeField] private float m_startingPosition = 0.5f;
         [Range(0, 1)] [SerializeField] private float m_speed = 1f;
+        [SerializeField] private bool m_loopRoute = false;
         
         
         private float position = 0.5f;
         private float target = 0.5f;
+        private int LapCount => Mathf.FloorToInt(position);
 
 
         public float Position
         {
-            get => position;
+            get => Mathf.Repeat(position, 1);
             set
             {
                 position = value;
@@ -43,7 +45,7 @@ namespace Enemies
         private void FixedUpdate()
         {
             float maxDiff = m_speed * Time.fixedDeltaTime;
-            float diff = Mathf.Clamp(Target - Position, -maxDiff, maxDiff);
+            float diff = Mathf.Clamp(Target - position, -maxDiff, maxDiff);
             if (Mathf.Approximately(diff, 0))
             {
                 ReachedTarget?.Invoke();
@@ -51,11 +53,30 @@ namespace Enemies
                 return;
             }
 
-            Position += diff;
+            Position = position + diff;
         }
         private void OnValidate()
         {
             Position = m_startingPosition;
+        }
+
+        public void SetTarget(float pos)
+        {
+            if (m_loopRoute)
+            {
+                float left = LapCount + pos;
+                float right = LapCount + pos;
+                if (Position < pos)
+                    left--;
+                else
+                    right++;
+
+                Target = (position - left < right - position) ? left : right;
+            }
+            else
+            {
+                Target = pos;
+            }
         }
     }
 }
