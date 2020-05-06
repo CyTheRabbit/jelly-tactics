@@ -1,0 +1,15 @@
+# Blender v2.90 (sub 0) OBJ File: 'Nat.blend'
+# www.blender.org
+mtllib Algae_celadon_01.mtl
+o Algae_celadon_01_Plane.018
+v -0.306064 0.000000 -0.000000
+v -0.306064 1.093117 0.000000
+v 0.306064 0.000000 -0.000000
+v 0.306064 1.093117 0.000000
+vt 0.272431 0.570789
+vt 0.356120 0.570789
+vt 0.356120 0.720239
+vt 0.272431 0.720239
+usemtl Material
+s off
+f 1/1 3/2 4/3 2/4

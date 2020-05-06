@@ -1,0 +1,15 @@
+# Blender v2.90 (sub 0) OBJ File: 'Nat.blend'
+# www.blender.org
+mtllib Algae_orange_07.mtl
+o Algae_orange_07_Plane.022
+v 0.203940 0.000000 -0.000000
+v -0.203941 0.000000 -0.000000
+v 0.203940 1.301175 0.000000
+v -0.203941 1.301175 0.000000
+vt 0.934008 0.561141
+vt 0.989773 0.561141
+vt 0.989773 0.739036
+vt 0.934008 0.739036
+usemtl Material
+s off
+f 2/1 1/2 3/3 4/4

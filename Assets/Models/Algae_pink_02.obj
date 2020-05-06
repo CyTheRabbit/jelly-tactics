@@ -1,0 +1,15 @@
+# Blender v2.90 (sub 0) OBJ File: 'Nat.blend'
+# www.blender.org
+mtllib Algae_pink_02.mtl
+o Algae_pink_02_Plane.016
+v 0.231902 -0.000000 -0.000000
+v -0.231902 -0.000000 -0.000000
+v 0.231902 1.449619 0.000000
+v -0.231902 1.449619 0.000000
+vt 0.058820 0.529856
+vt 0.122230 0.529856
+vt 0.122230 0.728046
+vt 0.058820 0.728046
+usemtl Material
+s off
+f 2/1 1/2 3/3 4/4

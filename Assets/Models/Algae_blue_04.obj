@@ -1,0 +1,15 @@
+# Blender v2.90 (sub 0) OBJ File: 'Nat.blend'
+# www.blender.org
+mtllib Algae_blue_04.mtl
+o Algae_blue_04_Plane.004
+v -0.230744 0.000000 -0.000000
+v 0.230744 0.000000 -0.000000
+v -0.230744 0.844439 0.000000
+v 0.230744 0.844439 0.000000
+vt 0.387778 0.869108
+vt 0.450872 0.869108
+vt 0.450872 0.984559
+vt 0.387778 0.984559
+usemtl Material
+s off
+f 1/1 2/2 4/3 3/4
