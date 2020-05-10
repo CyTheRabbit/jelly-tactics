@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -43,6 +44,9 @@ namespace Decorations
         [SerializeField] private float m_zMax = 10;
 
 
+        private readonly Dictionary<Fish, Queue<GameObject>> pool = new Dictionary<Fish, Queue<GameObject>>();
+
+
         private IEnumerator Start()
         {
             while (true)
@@ -52,12 +56,8 @@ namespace Decorations
                 bool left = Random.Range(0, 2) >= 1;
                 for (int i = 0; i < shoal; i++)
                 {
-                    float speed = left ? fish.Speed : -fish.Speed;
-                    float wobbleSpeed = fish.WobbleSpeed;
-                    float wobbleRange = fish.WobbleRange;
-
                     GameObject instance = Create(fish, left);
-                    StartCoroutine(FishAnimation(instance, speed, wobbleRange, wobbleSpeed));
+                    StartCoroutine(FishAnimation(fish, instance));
                     
                     yield return new WaitForSeconds(m_shoalFrequency);
                 }
@@ -75,13 +75,21 @@ namespace Decorations
             Quaternion rotation = Quaternion.identity * Quaternion.Euler(0, 180, 0);
             Vector3 scale = Vector3.one;
             if (left ^ fish.Flip) scale.x *= -1;
-            GameObject instance = Instantiate(fish.Prefab, position, rotation);
-            instance.transform.localScale = scale;
+
+            GameObject instance = Has(fish) ? Reuse(fish) : Instantiate(fish.Prefab, transform);
+
+            Transform t = instance.transform;
+            t.position = position;
+            t.rotation = rotation;
+            t.localScale = scale;
             return instance;
         }
 
-        private IEnumerator FishAnimation(GameObject instance, float speed, float wobbleRange, float wobbleSpeed)
+        private IEnumerator FishAnimation(Fish fish, GameObject instance)
         {
+            float speed = fish.Speed;
+            float wobbleRange = fish.WobbleRange;
+            float wobbleSpeed = fish.WobbleSpeed;
             Transform t = instance.transform;
             Vector3 wobbleDirection;
 
@@ -108,7 +116,23 @@ namespace Decorations
                 
                 yield return null;
             }
-            Destroy(instance);
+            Keep(fish, instance);
+        }
+
+        private bool Has(Fish fish) => pool.ContainsKey(fish) && pool[fish].Count > 0;
+
+        private GameObject Reuse(Fish fish)
+        {
+            GameObject instance = pool[fish].Dequeue();
+            instance.SetActive(true);
+            return instance;
+        }
+
+        private void Keep(Fish fish, GameObject instance)
+        {
+            instance.SetActive(false);
+            if (!pool.ContainsKey(fish)) pool[fish] = new Queue<GameObject>();
+            pool[fish].Enqueue(instance);
         }
 
         private void OnDrawGizmosSelected()
