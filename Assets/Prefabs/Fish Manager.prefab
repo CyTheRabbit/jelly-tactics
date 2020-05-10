@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6426131572603448023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6426131572603448017}
+  - component: {fileID: 6426131572603448022}
+  m_Layer: 0
+  m_Name: Fish Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6426131572603448017
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6426131572603448023}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6426131572603448022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6426131572603448023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84dea09a20d6431bb458ec59bca244ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_objects:
+  - m_prefab: {fileID: -927199367670048503, guid: 28c157f7c4efd4d5298909277d78285e,
+      type: 3}
+    m_speed: 0.8
+    m_wobbleRange: 0
+    m_wobbleSpeed: 0
+    m_height: 1.15
+    m_flip: 1
+    m_minShoal: 1
+    m_maxShoal: 1
+  - m_prefab: {fileID: -927199367670048503, guid: 39f418687db914c3f9907b825b519bfc,
+      type: 3}
+    m_speed: 0.9
+    m_wobbleRange: 120
+    m_wobbleSpeed: 12
+    m_height: 1.8
+    m_flip: 1
+    m_minShoal: 5
+    m_maxShoal: 10
+  - m_prefab: {fileID: -927199367670048503, guid: 7706096b9fc104839a9f4b4be61f254a,
+      type: 3}
+    m_speed: 1
+    m_wobbleRange: 180
+    m_wobbleSpeed: 25
+    m_height: 2.2
+    m_flip: 0
+    m_minShoal: 2
+    m_maxShoal: 5
+  - m_prefab: {fileID: -927199367670048503, guid: 9ba6d9538c6f74187b4e67146fb137a3,
+      type: 3}
+    m_speed: 0.75
+    m_wobbleRange: 160
+    m_wobbleSpeed: 20
+    m_height: 2.3
+    m_flip: 0
+    m_minShoal: 5
+    m_maxShoal: 10
+  - m_prefab: {fileID: -927199367670048503, guid: 7c544976dc3484ece91be1cc2a908e9c,
+      type: 3}
+    m_speed: 0.5
+    m_wobbleRange: 120
+    m_wobbleSpeed: 15
+    m_height: 1.8
+    m_flip: 0
+    m_minShoal: 2
+    m_maxShoal: 5
+  m_frequency: 15
+  m_shoalFrequency: 0.75
+  m_xLeft: -7
+  m_xRight: 5.5
+  m_zMin: -3
+  m_zMax: 0
