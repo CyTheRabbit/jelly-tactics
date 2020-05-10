@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: New Material
+  m_Name: dark
   m_Shader: {fileID: 4800000, guid: bb7edd060c754b9eb0db5b570b82b80b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cdf58d6e3f9be6c4c8c3f4742c4836ae, type: 3}
+        m_Texture: {fileID: 2800000, guid: 24a4f408b5fd71548b38adeb4ee09e05, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -65,7 +65,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.5
+    - _Glossiness: 0.294
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -75,15 +75,15 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaveAmplitude: 0.1
+    - _WaveAmplitude: 0.166
     - _WaveCosSpeed: 0.025
-    - _WaveDim: 0.9
+    - _WaveDim: 0.58
     - _WaveLight: 1.15
-    - _WaveOrigin: 0.3
+    - _WaveOrigin: 0.344
     - _WaveScale: 64
     - _WaveSpeed: 0.1
-    - _WaveWidth: 0.3
+    - _WaveWidth: 0.137
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.5009235, b: 0.2688679, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
