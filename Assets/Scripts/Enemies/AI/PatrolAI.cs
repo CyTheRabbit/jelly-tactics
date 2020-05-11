@@ -7,6 +7,7 @@ namespace Enemies.AI
 {
     public class PatrolAI : MonoBehaviour
     {
+        [SerializeField] private int m_priority = 0;
         [SerializeField] private RouteFollower m_follower = null;
         
         [Serializable]
@@ -27,7 +28,7 @@ namespace Enemies.AI
             {
                 foreach (Place place in m_places)
                 {
-                    m_follower.SetTarget(place.Position);
+                    m_follower.SetTarget(place.Position, m_priority);
                     yield return new WaitUntil(() => m_follower.Halt);
                     yield return new WaitForSeconds(place.Wait);
                 }

@@ -7,6 +7,7 @@ namespace Player
     public class Army : MonoBehaviour
     {
         [SerializeField] private FlickController m_flicker = null;
+        [SerializeField] private EventManager m_events = null;
 
         private void Start()
         {
@@ -22,6 +23,7 @@ namespace Player
             furthest.Freeze = false;
             furthest.transform.SetParent(null, true);
             furthest.Flick(direction);
+            m_events.OnJellyfishFlicked(new Ray(furthest.transform.position, direction2d));
         }
 
         private void ManualDispatch(Vector2 direction2d, Pawn pawn)
@@ -31,6 +33,7 @@ namespace Player
             pawn.Freeze = false;
             pawn.transform.SetParent(null, true);
             pawn.Flick(direction);
+            m_events.OnJellyfishFlicked(new Ray(pawn.transform.position, direction));
         }
         
         [CanBeNull]

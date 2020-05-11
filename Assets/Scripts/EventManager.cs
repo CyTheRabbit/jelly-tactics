@@ -6,11 +6,17 @@ public class EventManager : BaseManager
 {
     public event Action ManagersLoaded = null;
 
+    public event Action<Ray> JellyfishFlicked = null;
+
     public void OnManagersLoaded()
     {
         ManagersLoaded?.Invoke();
     }
 
+    public void OnJellyfishFlicked(Ray flick)
+    {
+        JellyfishFlicked?.Invoke(flick);
+    }
 
     public override void Init()
     {

@@ -7,6 +7,7 @@ namespace Enemies.AI
 {
     public class DefensiveAI : MonoBehaviour
     {
+        [SerializeField] private int m_priority = 0;
         [SerializeField] private BaseRoute m_route = null;
         [SerializeField] private RouteFollower m_follower = null;
         [SerializeField] private float m_safeDistance = 2;
@@ -106,7 +107,7 @@ namespace Enemies.AI
                 // Play panic
                 return;
             }
-            m_follower.SetTarget(locations.Where(IsSafe).First().Position);
+            m_follower.SetTarget(locations.Where(IsSafe).First().Position, m_priority);
         }
     }
 }

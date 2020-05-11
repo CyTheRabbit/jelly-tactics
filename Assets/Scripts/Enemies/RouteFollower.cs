@@ -16,6 +16,7 @@ namespace Enemies
         
         private float position = 0.5f;
         private float target = 0.5f;
+        private int currentPriority = 0;
         private int LapCount => Mathf.FloorToInt(position);
 
 
@@ -48,6 +49,7 @@ namespace Enemies
             float diff = Mathf.Clamp(Target - position, -maxDiff, maxDiff);
             if (Mathf.Approximately(diff, 0))
             {
+                currentPriority = 0;
                 ReachedTarget?.Invoke();
                 enabled = false;
                 return;
@@ -60,8 +62,10 @@ namespace Enemies
             Position = m_startingPosition;
         }
 
-        public void SetTarget(float pos)
+        public void SetTarget(float pos, int priority)
         {
+            if (currentPriority >= priority) return;
+            currentPriority = priority;
             if (m_loopRoute)
             {
                 float left = LapCount + pos;
