@@ -41,6 +41,29 @@ namespace Enemies
 
         public override Vector3 Rotation(float _) => Vector3.Cross(RightHand - LeftHand, Vector3.up);
 
+        public override (bool, float) WillIntersect(Ray trajectory)
+        {
+            Vector3 ownStart = LeftHand;
+            Vector3 ownDirection = (RightHand - LeftHand).normalized;
+            Vector3 perpendicular = Vector3.Cross(ownDirection, Vector3.up).normalized;
+
+            if (trajectory.direction.normalized == ownDirection) return (false, 0);
+
+            Vector3 distance = trajectory.origin - ownStart;
+
+            float yDiff = Vector3.Dot(trajectory.direction.normalized, ownDirection);
+            float xDiff = Vector3.Dot(trajectory.direction.normalized, perpendicular);
+            float dy = yDiff / xDiff;
+
+            float xDistance = Vector3.Dot(distance, -perpendicular);
+            float yDistance = Vector3.Dot(distance, ownDirection);
+
+            float intersectionPoint = (yDistance + xDistance * dy) / Length;
+            bool will = intersectionPoint >= 0 && intersectionPoint <= 1;
+
+            return (will, intersectionPoint);
+        }
+
         private void CheckIntersection()
         {
             Ray ray = new Ray(LeftHand, RightHand - LeftHand);

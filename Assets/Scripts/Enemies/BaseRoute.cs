@@ -10,6 +10,8 @@ namespace Enemies
         public abstract Vector3 Lerp(float t);
         public abstract Vector3 Rotation(float t);
 
+        public abstract (bool, float) WillIntersect(Ray trajectory);
+
         public event Action<Rigidbody, float> ActorIntersected;
 
         public void Refresh()

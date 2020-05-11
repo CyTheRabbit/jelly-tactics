@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,6 +24,11 @@ namespace Enemies
         public override Vector3 Rotation(float t)
         {
             return transform.position - Lerp(t);
+        }
+
+        public override (bool, float) WillIntersect(Ray trajectory)
+        {
+            return (false, 0);
         }
 
         private void OnValidate()
