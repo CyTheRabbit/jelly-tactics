@@ -18,3 +18,5 @@ MonoBehaviour:
     m_name: Tutorial Level
   - m_scene: Level 1
     m_name: Level 1
+  - m_scene: Level 2
+    m_name: Level 2

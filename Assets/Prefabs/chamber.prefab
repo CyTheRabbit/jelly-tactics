@@ -167,6 +167,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9154277155589260346}
+  - component: {fileID: 5989946940350301213}
+  - component: {fileID: 5524160707293879498}
   m_Layer: 0
   m_Name: chamber
   m_TagString: Untagged
@@ -191,6 +193,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &5989946940350301213
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283249349987005993}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 4.8245897
+  m_Height: 16.020668
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.8848906, z: -3.7565203}
+--- !u!114 &5524160707293879498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283249349987005993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5e74ca247b441280a7933f9429ed7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_threshold: 1
+  m_onBreak:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7660902897204574758
 GameObject:
   m_ObjectHideFlags: 0
