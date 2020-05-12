@@ -13,7 +13,7 @@ namespace Rules
 
         public void Add()
         {
-            if (collected++ >= m_threshold) Trigger();
+            if (++collected >= m_threshold) Trigger();
         }
 
         public void AddMultiple(int count)
