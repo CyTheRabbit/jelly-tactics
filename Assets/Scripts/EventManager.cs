@@ -15,6 +15,8 @@ public class EventManager : BaseManager
     public event Action CrabDefeated = null;
 
     public event Action Victory = null;
+    public event Action ClearUI = null;
+    public event Action LevelStarted = null;
 
     public void OnManagersLoaded()
     {
@@ -41,6 +43,11 @@ public class EventManager : BaseManager
         CrabDefeated?.Invoke();
     }
 
+    public void OnClearUI()
+    {
+        ClearUI?.Invoke();
+    }
+
     public void OnVictory()
     {
         Victory?.Invoke();
@@ -49,5 +56,10 @@ public class EventManager : BaseManager
     public override void Init()
     {
         ManagersLoaded = null;
+    }
+
+    public void OnLevelLoaded(AsyncOperation operation)
+    {
+        LevelStarted?.Invoke();
     }
 }
