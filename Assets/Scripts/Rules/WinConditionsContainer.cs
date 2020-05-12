@@ -1,14 +1,14 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Rules
 {
     public class WinConditionsContainer : MonoBehaviour
     {
-        public event Action OnWin = null;
-        public event Action OnLoose = null;
+        [SerializeField] private UnityEvent m_onWin = null;
+        [SerializeField] private UnityEvent m_onLoose = null;
 
 
         public IEnumerable<WinCondition> Optionals => GetComponentsInChildren<WinCondition>()
@@ -17,12 +17,12 @@ namespace Rules
 
         public void Win()
         {
-            OnWin?.Invoke();
+            m_onWin?.Invoke();
         }
 
         public void Loose()
         {
-            OnLoose?.Invoke();
+            m_onLoose?.Invoke();
         }
     }
 }

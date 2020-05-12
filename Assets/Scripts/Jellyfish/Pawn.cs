@@ -10,6 +10,7 @@ namespace Jellyfish
     public class Pawn : MonoBehaviour
     {
         public event Action Stopped = null;
+        public event Action Perished = null;
 
         [SerializeField] private JellyfishConfig m_config = null;
 
@@ -36,6 +37,11 @@ namespace Jellyfish
         {
             startPosition = rigidbody.position;
             startParent = transform.parent;
+        }
+
+        private void OnDisable()
+        {
+            Perished?.Invoke();
         }
 
         public void Flick(Vector3 direction)
