@@ -9,6 +9,8 @@ namespace Enemies
     {
         [SerializeField] private Vector3 m_leftHand = Vector3.right;
         [SerializeField] private Vector3 m_rightHand = Vector3.right;
+        [Space]
+        [SerializeField] private bool m_unreachableIntersects = false;
 
         private readonly RaycastHit[] raycastHits = new RaycastHit[64];
         private readonly HashSet<Rigidbody> lastingIntersections = new HashSet<Rigidbody>();
@@ -59,9 +61,16 @@ namespace Enemies
             float yDistance = Vector3.Dot(distance, ownDirection);
 
             float intersectionPoint = (yDistance + xDistance * dy) / Length;
-            bool will = intersectionPoint >= 0 && intersectionPoint <= 1;
 
-            return (will, intersectionPoint);
+            if (m_unreachableIntersects)
+            {
+                return (true, Mathf.Clamp(intersectionPoint, 0.01f, 0.99f));
+            }
+            else
+            {
+                bool will = intersectionPoint >= 0 && intersectionPoint <= 1;
+                return (will, intersectionPoint);
+            }
         }
 
         private void CheckIntersection()
