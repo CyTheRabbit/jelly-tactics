@@ -26,7 +26,8 @@ namespace Enemies
             set
             {
                 position = value;
-                GetComponentInParent<BaseRoute>().Refresh();
+                BaseRoute route = GetComponentInParent<BaseRoute>();
+                if (route != null) route.Refresh();
             }
         }
 
@@ -57,6 +58,12 @@ namespace Enemies
 
             Position = position + diff;
         }
+
+        private void Awake()
+        {
+            target = position;
+        }
+
         private void OnValidate()
         {
             Position = m_startingPosition;
