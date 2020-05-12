@@ -33,6 +33,8 @@ public class LevelManager : ScriptableObject
 
     private void Load()
     {
+        if (currentLevel == null) return;
+        if (currentLevel.IsLoaded) Unload();
         AsyncOperation loading = SceneManager.LoadSceneAsync(currentLevel.Scene, LoadSceneMode.Additive);
         loading.completed += m_events.OnLevelLoaded;
         currentLevel.IsLoaded = true;
@@ -41,7 +43,11 @@ public class LevelManager : ScriptableObject
     private void Unload(Action callback = null)
     {
         if (currentLevel == null || !currentLevel.IsLoaded) return;
-        SceneManager.UnloadSceneAsync(currentLevel.Scene).completed += _ => callback();
+        AsyncOperation unloading = SceneManager.UnloadSceneAsync(currentLevel.Scene);
+        if (callback != null)
+        {
+            unloading.completed += _ => callback.Invoke();
+        }
         currentLevel.IsLoaded = false;
     }
 
@@ -53,9 +59,16 @@ public class LevelManager : ScriptableObject
         {
             scenery = LevelSequence();
         }
-        scenery.MoveNext();
-        currentLevel = scenery.Current;
-        Load();
+        bool hasNextLevel = scenery.MoveNext();
+        if (hasNextLevel)
+        {
+            currentLevel = scenery.Current;
+            Load();
+        }
+        else
+        {
+            // Win the game
+        }
     }
 
     public void Restart()
