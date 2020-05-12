@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [CreateAssetMenu(fileName = "Level Manager", menuName = "Managers/Level Manager", order = 0)]
-public class LevelManager : ScriptableObject
+public class LevelManager : BaseManager
 {
     [Serializable]
     private class Level
@@ -76,7 +76,7 @@ public class LevelManager : ScriptableObject
         Unload(Load);
     }
 
-    public void Init()
+    public override void Init()
     {
         currentLevel = null;
         foreach (Level level in m_levelSequence)

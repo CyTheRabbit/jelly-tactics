@@ -6,7 +6,6 @@ public class LevelHolder : MonoBehaviour
 
     private void Start()
     {
-        m_levelManager.Init();
         if (transform.childCount == 0)
         {
             m_levelManager.LoadNextLevel();
