@@ -20,16 +20,18 @@ namespace Player
             Vector3 direction = ProjectDirection(direction2d);
             Pawn furthest = FindFurthest(direction);
             if (furthest == null) return;
-            furthest.Freeze = false;
-            furthest.transform.SetParent(null, true);
-            furthest.Flick(direction);
-            m_events.OnJellyfishFlicked(new Ray(furthest.transform.position, direction2d));
+            Flick(direction, furthest);
         }
 
         private void ManualDispatch(Vector2 direction2d, Pawn pawn)
         {
             if (pawn.transform.parent != transform) return;
             Vector3 direction = ProjectDirection(direction2d);
+            Flick(direction, pawn);
+        }
+
+        private void Flick(Vector3 direction, Pawn pawn)
+        {
             pawn.Freeze = false;
             pawn.transform.SetParent(null, true);
             pawn.Flick(direction);

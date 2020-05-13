@@ -11,14 +11,17 @@ namespace Rules
         private int collected = 0;
 
 
+        public bool Activated => collected >= m_threshold;
+
+
         public void Add()
         {
-            if (++collected >= m_threshold) Trigger();
+            if (!Activated & ++collected >= m_threshold) Trigger();
         }
 
         public void AddMultiple(int count)
         {
-            if ((collected += count) >= m_threshold) Trigger();
+            if (!Activated & (collected += count) >= m_threshold) Trigger();
         }
 
         public void Subtract()
