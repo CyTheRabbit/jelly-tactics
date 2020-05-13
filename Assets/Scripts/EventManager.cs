@@ -15,6 +15,7 @@ public class EventManager : BaseManager
     public event Action CrabDefeated = null;
 
     public event Action Victory = null;
+    public event Action Defeat = null;
     public event Action ClearUI = null;
     public event Action LevelStarted = null;
     public event Action GameCompleted = null;
@@ -52,6 +53,11 @@ public class EventManager : BaseManager
     public void OnVictory()
     {
         Victory?.Invoke();
+    }
+
+    public void OnDefeat()
+    {
+        Defeat?.Invoke();
     }
 
     public override void Init()

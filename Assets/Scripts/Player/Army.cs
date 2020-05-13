@@ -1,6 +1,7 @@
 using Jellyfish;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player
 {
@@ -8,6 +9,8 @@ namespace Player
     {
         [SerializeField] private FlickController m_flicker = null;
         [SerializeField] private EventManager m_events = null;
+        [Space]
+        [SerializeField] private UnityEvent m_onEmpty = null;
 
         private void Start()
         {
