@@ -16,7 +16,18 @@ MonoBehaviour:
   m_levelSequence:
   - m_scene: Tutorial
     m_name: Tutorial Level
+    m_description: 'Score a goal
+
+      with jellyfish
+
+      3 times!'
   - m_scene: Level 1
     m_name: Level 1
+    m_description: 'Hit that crab
+
+      from behind!'
   - m_scene: Level 2
     m_name: Level 2
+    m_description: 'Set free your
+
+      fellow friend!'

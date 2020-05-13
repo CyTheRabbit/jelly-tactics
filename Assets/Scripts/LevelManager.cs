@@ -12,9 +12,11 @@ public class LevelManager : BaseManager
     {
         [SerializeField, Scene] private string m_scene = null;
         [SerializeField] private string m_name = null;
+        [SerializeField, Multiline] private string m_description = null;
 
         public string Scene => m_scene;
         public string Name => m_name;
+        public string Description => m_description;
         public bool IsLoaded { get; set; }
     }
     
@@ -24,6 +26,9 @@ public class LevelManager : BaseManager
 
     private Level currentLevel = null;
     private IEnumerator<Level> scenery = null;
+
+
+    public string CurrentDescription => currentLevel?.Description;
         
 
     private IEnumerator<Level> LevelSequence()
