@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Linq;
 using Animations;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Jellyfish
@@ -10,7 +11,6 @@ namespace Jellyfish
     public class Pawn : MonoBehaviour
     {
         public event Action Stopped = null;
-        public event Action Perished = null;
 
         [SerializeField] private JellyfishConfig m_config = null;
 
@@ -39,11 +39,6 @@ namespace Jellyfish
             startParent = transform.parent;
         }
 
-        private void OnDisable()
-        {
-            Perished?.Invoke();
-        }
-
         public void Flick(Vector3 direction)
         {
             // rigidbody.AddForce(direction * m_config.Impulse, ForceMode.VelocityChange);
@@ -63,6 +58,15 @@ namespace Jellyfish
         public void JumpReset()
         {
             moveRoutine.Start(JumpCoroutine(startPosition, m_config.JumpTime));
+        }
+
+        public void Perish()
+        {
+            moveRoutine.Stop();
+            DOTween.Sequence()
+                .Append(transform.DOJump(transform.position + Vector3.down, 1.5f, 1, 0.5f))
+                .Join(transform.DOScale(0, 0.75f))
+                .AppendCallback(() => Destroy(gameObject));
         }
 
         private IEnumerator ImpulsesCoroutine(Vector3 direction)

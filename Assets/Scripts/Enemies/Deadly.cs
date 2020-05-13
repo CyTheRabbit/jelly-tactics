@@ -1,3 +1,4 @@
+using Jellyfish;
 using UnityEngine;
 
 namespace Enemies
@@ -6,7 +7,9 @@ namespace Enemies
     {
         private void OnCollisionEnter(Collision other)
         {
-            Destroy(other.gameObject);
+            Vulnerable victim = other.gameObject.GetComponent<Vulnerable>();
+            if (victim == null) return;
+            victim.Perish();
         }
     }
 }
