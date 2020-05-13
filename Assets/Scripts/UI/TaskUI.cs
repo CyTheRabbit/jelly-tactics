@@ -13,6 +13,10 @@ namespace UI
         [SerializeField] private CanvasGroup m_panelGroup = null;
         [SerializeField] private TMP_Text m_text = null;
 
+
+        private GameObject currentSkin = null;
+
+
         private void Start()
         {
             m_panel.pivot = m_panel.pivot * Vector2.right + Vector2.up;
@@ -26,8 +30,8 @@ namespace UI
 
         private void OnLevelStarted()
         {
-            m_text.text = m_levelManager.CurrentDescription;
-            Show();
+            SetSkin("Briefing");
+            DisplayMessage(m_levelManager.CurrentDescription);
         }
 
         private void Show()
@@ -46,6 +50,19 @@ namespace UI
         {
             m_panelGroup.interactable = active;
             m_panelGroup.blocksRaycasts = active;
+        }
+
+        public void SetSkin(string skin)
+        {
+            if (currentSkin != null) currentSkin.SetActive(false);
+            currentSkin = m_panel.Find(skin).gameObject;
+            if (currentSkin != null) currentSkin.SetActive(true);
+        }
+
+        public void DisplayMessage(string message)
+        {
+            m_text.text = message;
+            Show();
         }
     }
 }

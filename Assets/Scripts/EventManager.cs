@@ -17,6 +17,7 @@ public class EventManager : BaseManager
     public event Action Victory = null;
     public event Action ClearUI = null;
     public event Action LevelStarted = null;
+    public event Action GameCompleted = null;
 
     public void OnManagersLoaded()
     {
@@ -61,5 +62,10 @@ public class EventManager : BaseManager
     public void OnLevelLoaded(AsyncOperation operation)
     {
         LevelStarted?.Invoke();
+    }
+
+    public void OnGameCompleted()
+    {
+        GameCompleted?.Invoke();
     }
 }

@@ -59,7 +59,6 @@ public class LevelManager : BaseManager
 
     public void LoadNextLevel()
     {
-        Unload();
         if (scenery == null)
         {
             scenery = LevelSequence();
@@ -67,12 +66,13 @@ public class LevelManager : BaseManager
         bool hasNextLevel = scenery.MoveNext();
         if (hasNextLevel)
         {
+            Unload();
             currentLevel = scenery.Current;
             Load();
         }
         else
         {
-            // Win the game
+            m_events.OnGameCompleted();
         }
     }
 
